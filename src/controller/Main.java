@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -25,7 +26,6 @@ public class Main extends Application {
         Parent fxmlInicio = FXMLLoader.load(getClass().getResource("../view/inicio.fxml"));
         inicioScreen = new Scene(fxmlInicio, 1280, 768);
 
-
         primaryStage.setScene(loginScreen);
         primaryStage.show();
     }
@@ -35,6 +35,8 @@ public class Main extends Application {
         switch (tela){
             case "inicio":
                 stage.setScene(inicioScreen);
+                stage.setResizable(false);
+                stage.setMaximized(true);
                 break;
         }
     }
