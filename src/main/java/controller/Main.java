@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -17,8 +16,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        stage =primaryStage;
-        primaryStage.setTitle("SGS - version 1.0");
+        stage = primaryStage;
+        primaryStage.setTitle("GERENINFOR");
 
         Parent fxmlLogin = FXMLLoader.load(getClass().getResource("../view/login.fxml"));
         loginScreen = new Scene(fxmlLogin, 350, 200);
@@ -26,10 +25,10 @@ public class Main extends Application {
         Parent fxmlInicio = FXMLLoader.load(getClass().getResource("../view/inicio.fxml"));
         inicioScreen = new Scene(fxmlInicio, 1280, 768);
 
+
         primaryStage.setScene(loginScreen);
         primaryStage.show();
     }
-
 
     public static void changeScreen(String tela){
         switch (tela){
@@ -40,6 +39,7 @@ public class Main extends Application {
                 break;
         }
     }
+
 
     public static void main(String[] args) {
         launch(args);
