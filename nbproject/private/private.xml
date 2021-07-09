@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/E:/PROJETOS/SSG2/src/controller/UsuarioController.java</file>
+            <file>file:/E:/PROJETOS/SSG2/src/model/dao/UsuarioDAO.java</file>
+            <file>file:/E:/PROJETOS/SSG2/src/model/bean/Servico.java</file>
+            <file>file:/E:/PROJETOS/SSG2/src/model/bean/Usuario.java</file>
+            <file>file:/E:/PROJETOS/SSG2/src/model/dao/MaterialDAO.java</file>
+            <file>file:/E:/PROJETOS/SSG2/src/view/crudUsuario.fxml</file>
+        </group>
+    </open-files>
+</project-private>
