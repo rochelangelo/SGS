@@ -34,5 +34,9 @@ public class inicioController {
     public void crudMaterial(ActionEvent e){
         Main.changeScreen("crudMaterial");
     }
+    
+    public void crudUsuario(ActionEvent e){
+        Main.changeScreen("crudUsuario");
+    }
 
 }

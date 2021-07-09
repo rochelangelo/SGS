@@ -112,6 +112,9 @@ public class materialController implements Initializable {
     public void buttonFechaJanela(){
         Main.changeScreen("inicio");
     }
+    public void crudUsuario(ActionEvent e){
+        Main.changeScreen("crudUsuario");
+    }
     
     @FXML
     public void handleButtonInserir() throws IOException{

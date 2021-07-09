@@ -1,11 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UsuarioController">
-    
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UsuarioController">
+   <children>
+      <Pane prefHeight="768.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ToolBar prefHeight="30.0" prefWidth="1280.0">
+               <items>
+                  <Button disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Usuarios" />
+                  <Button mnemonicParsing="false" onAction="#crudMaterial" prefHeight="25.0" prefWidth="65.0" text="Material" />
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Tarefas" />
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Ajuda" />
+               </items>
+            </ToolBar>
+            <Pane layoutY="35.0" prefHeight="733.0" prefWidth="1280.0">
+               <children>
+                  <Pane prefHeight="733.0" prefWidth="1280.0">
+                     <children>
+                        <SplitPane dividerPositions="0.5033444816053512" prefHeight="733.0" prefWidth="1280.0">
+                           <items>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <TableView fx:id="tableViewUsuario" layoutX="23.0" layoutY="33.0" prefHeight="398.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <columns>
+                                          <TableColumn fx:id="tabColumnUsuarioNome" maxWidth="733.0" prefWidth="320.0" text="NOME" />
+                                          <TableColumn fx:id="tabColumnUsuarioGraduacao" maxWidth="733.0" minWidth="0.0" prefWidth="320.0" text="GRADUAÇÃO" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="625.0">
+                                 <children>
+                                    <Label layoutX="228.0" layoutY="18.0" text="DETALHES USUARIO" AnchorPane.leftAnchor="193.5" AnchorPane.rightAnchor="193.5">
+                                       <font>
+                                          <Font name="System Bold" size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <GridPane layoutX="129.0" layoutY="104.0" prefHeight="227.0" prefWidth="632.0" AnchorPane.bottomAnchor="384.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="372.0" minWidth="10.0" prefWidth="250.0" />
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="314.0" minWidth="0.0" prefWidth="314.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints maxHeight="60.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="50.0" minHeight="0.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="60.0" minHeight="0.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="60.0" minHeight="0.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <Label text="ID" />
+                                          <Label text="NOME" GridPane.rowIndex="1" />
+                                          <Label text="GRADUAÇÃO" GridPane.rowIndex="2" />
+                                          <Label prefHeight="17.0" prefWidth="50.0" text="FUNÇÃO" GridPane.rowIndex="3" />
+                                          <Label fx:id="labelUsuarioNome" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <Label fx:id="labelUsuarioGraduacao" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <Label fx:id="labelUsuarioFuncao" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <Label fx:id="labelUsuarioId" GridPane.columnIndex="1" />
+                                       </children>
+                                    </GridPane>
+                                    <Group layoutX="90.0" layoutY="632.0" AnchorPane.bottomAnchor="150.0">
+                                       <children>
+                                          <Button layoutX="185.0" layoutY="3.0" mnemonicParsing="false" onAction="#handleButtonAlterar" prefHeight="25.0" prefWidth="80.0" text="ATUALIZAR" />
+                                          <Button layoutY="5.0" mnemonicParsing="false" onAction="#handleButtonInserir" prefHeight="25.0" prefWidth="80.0" text="INSERIR" />
+                                          <Button layoutX="388.0" mnemonicParsing="false" onAction="#handleButtonRemove" prefHeight="25.0" prefWidth="80.0" text="EXCLUIR" />
+                                       </children>
+                                    </Group>
+                                    <Button layoutX="561.0" layoutY="22.0" mnemonicParsing="false" onAction="#buttonFechaJanela" text="❌" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="12.5" />
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </children>
 </AnchorPane>

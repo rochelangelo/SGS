@@ -20,15 +20,15 @@
          <children>
             <ToolBar prefHeight="30.0" prefWidth="1280.0">
                <items>
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Usuarios" />
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Material" />
+                  <Button mnemonicParsing="false" onAction="#crudUsuario" prefHeight="25.0" prefWidth="65.0" text="Usuarios" />
+                  <Button disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Material" />
                   <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Tarefas" />
                   <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Ajuda" />
                </items>
             </ToolBar>
-            <Pane prefHeight="733.0" prefWidth="1280.0">
+            <Pane layoutY="35.0" prefHeight="733.0" prefWidth="1280.0">
                <children>
-                  <Pane layoutY="40.0" prefHeight="733.0" prefWidth="1280.0">
+                  <Pane prefHeight="733.0" prefWidth="1280.0">
                      <children>
                         <SplitPane dividerPositions="0.5033444816053512" prefHeight="733.0" prefWidth="1280.0">
                            <items>
