@@ -16,6 +16,8 @@ public class Usuario {
     private String nome;
     private String graduacao;
     private String funcao;
+    private String senha;
+    private String login;
 
     public int getId() {
         return id;
@@ -48,15 +50,33 @@ public class Usuario {
     public void setFuncao(String funcao) {
         this.funcao = funcao;
     }
+    
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+    
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 
     public Usuario() {
     }
 
-    public Usuario(int id, String nome, String graduacao, String funcao) {
+    public Usuario(int id, String nome, String graduacao, String funcao, String login, String senha) {
         this.id = id;
         this.nome = nome;
         this.graduacao = graduacao;
         this.funcao = funcao;
+        this.login = login;
+        this.senha = senha;
     }
     
     

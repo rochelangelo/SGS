@@ -100,9 +100,13 @@ public class CadUsuarioDialogController implements Initializable {
     
     @FXML
     public void handleButtonConfirmar() throws ParseException {
+        String login = textFieldUsuarioNome.getText().toLowerCase();
+        
         usuario.setNome(textFieldUsuarioNome.getText());
         usuario.setGraduacao(textFieldUsuarioGraduacao.getText());
         usuario.setFuncao(textFieldUsuarioFuncao.getText());
+        usuario.setSenha(login);
+        usuario.setLogin(login);
         
         buttonConfirmClick = true;
         dialogStage.close();

@@ -137,6 +137,22 @@ public class UsuarioController implements Initializable {
     }
     
     @FXML
+    public void handleButtonAlterarSenha() throws IOException{
+        Usuario usuario = tableViewUsuario.getSelectionModel().getSelectedItem();
+        if(usuario != null){
+            boolean buttonConfirmarClick = showAltSenhaDialog(usuario);
+            if(buttonConfirmarClick){
+                usuarioDAO.alterarSenha(usuario);
+                carregarTableViewUsuarios();
+            }
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Por favor, selecionar um Usuario!");
+            alert.show();
+        }
+    }
+    
+    @FXML
     public void handleButtonRemove() throws IOException{
         Usuario usuario = tableViewUsuario.getSelectionModel().getSelectedItem();
         if(usuario != null){
@@ -160,6 +176,25 @@ public class UsuarioController implements Initializable {
         dialogStage.setScene(scene);
         
         CadUsuarioDialogController controller = loader.getController();
+        controller.setDialogStage(dialogStage);
+        controller.setUsuario(usuario);
+        
+        dialogStage.showAndWait();
+        
+        return controller.isButtonConfirmClick();
+    }
+    
+    public boolean showAltSenhaDialog(Usuario usuario) throws IOException{
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(AlteraSenhaDialogController.class.getResource("../view/alteraSenhaDialog.fxml"));
+        AnchorPane page = (AnchorPane) loader.load();
+        
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("SGS-Cadastro Usuario");
+        Scene scene = new Scene(page);
+        dialogStage.setScene(scene);
+        
+        AlteraSenhaDialogController controller = loader.getController();
         controller.setDialogStage(dialogStage);
         controller.setUsuario(usuario);
         

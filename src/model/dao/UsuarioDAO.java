@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -33,15 +33,18 @@ public class UsuarioDAO {
     }
     
     public boolean inserir(Usuario usuario){
-        String sql = "INSERT INTO usuarios (nome, graduacao, funcao)VALUES(?,?,?)";
+        String sql = "INSERT INTO usuarios (nome, graduacao, funcao, senha, login)VALUES(?,?,?,?,?)";
         
         try{
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, usuario.getNome());
             stmt.setString(2, usuario.getGraduacao());
             stmt.setString(3, usuario.getFuncao());
+            stmt.setString(4, usuario.getSenha());
+            stmt.setString(5, usuario.getLogin());
             stmt.execute();
             return true;
+                        
         }catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
@@ -56,6 +59,20 @@ public class UsuarioDAO {
             stmt.setString(2, usuario.getGraduacao());
             stmt.setString(3, usuario.getFuncao());
             stmt.setInt(4, usuario.getId());
+            stmt.execute();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+    
+    public boolean alterarSenha(Usuario usuario) {
+        String sql = "UPDATE usuarios SET senha=? WHERE id=?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, usuario.getSenha());
+            stmt.setInt(2, usuario.getId());
             stmt.execute();
             return true;
         } catch (SQLException ex) {
@@ -89,6 +106,8 @@ public class UsuarioDAO {
                 usuario.setNome(resultado.getString("nome"));
                 usuario.setGraduacao(resultado.getString("graduacao"));
                 usuario.setFuncao(resultado.getString("funcao"));
+                usuario.setSenha(resultado.getString("senha"));
+                usuario.setLogin(resultado.getString("login"));
                 retorno.add(usuario);
             }
         } catch (SQLException ex) {
@@ -109,12 +128,32 @@ public class UsuarioDAO {
                 usuario.setNome(resultado.getString("nome"));
                 usuario.setGraduacao(resultado.getString("graduacao"));
                 usuario.setFuncao(resultado.getString("funcao"));
+                usuario.setSenha(resultado.getString("senha"));
+                usuario.setLogin(resultado.getString("login"));
                 retorno = usuario;
             }
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return retorno;
+    }
+    
+    public Boolean existenciaUsuario(String nome){
+        String sql = "SELECT * FROM usuarios WHERE nome=?";
+        boolean resul = false;
+        try{
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, nome);
+            ResultSet resultado = stmt.executeQuery();
+            String nResul = resultado.getString("nome");
+            if(nResul.equals(nome)){
+                resul = true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return resul;
     }
 
     
