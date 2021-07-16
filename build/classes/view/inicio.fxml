@@ -13,7 +13,7 @@
               <items>
                 <Button mnemonicParsing="false" onAction="#crudUsuario" prefHeight="25.0" prefWidth="65.0" text="Usuarios" />
                   <Button mnemonicParsing="false" onAction="#crudMaterial" prefHeight="25.0" prefWidth="65.0" text="Material" />
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Tarefas" />
+                  <Button mnemonicParsing="false" onAction="#crudServico" prefHeight="25.0" prefWidth="65.0" text="Tarefas" />
                   <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Ajuda" />
               </items>
             </ToolBar>

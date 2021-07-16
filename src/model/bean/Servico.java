@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author r-r20
  */
-class Servico {
+public class Servico {
     
     private int id;
     private Date dataEntrada;
@@ -20,11 +20,12 @@ class Servico {
     private String secaoRequerente;
     private String observacao;
     private String situacao;
+    private int idMaquina;
 
     public Servico() {
     }
 
-    public Servico(int id, Date dataEntrada, Date dataSaida, String tecnicoResponsavel, String secaoRequerente, String observacao, String situacao) {
+    public Servico(int id, Date dataEntrada, Date dataSaida, String tecnicoResponsavel, String secaoRequerente, String observacao, String situacao, int idMaquina) {
         this.id = id;
         this.dataEntrada = dataEntrada;
         this.dataSaida = dataSaida;
@@ -32,6 +33,7 @@ class Servico {
         this.secaoRequerente = secaoRequerente;
         this.observacao = observacao;
         this.situacao = situacao;
+        this.idMaquina = idMaquina;
     }
 
     public int getId() {
@@ -89,6 +91,15 @@ class Servico {
     public void setSituacao(String situacao) {
         this.situacao = situacao;
     }
+
+    public int getIdMaquina() {
+        return idMaquina;
+    }
+
+    public void setIdMaquina(int idMaquina) {
+        this.idMaquina = idMaquina;
+    }
+    
     
     
     

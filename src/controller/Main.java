@@ -15,6 +15,7 @@ public class Main extends Application {
     private static Scene inicioScreen;
     private static Scene crudMaterial;
     private static Scene crudUsuario;
+    private static Scene crudServico;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -32,6 +33,9 @@ public class Main extends Application {
         
         Parent fxmlCrudUsuario = FXMLLoader.load(getClass().getResource("../view/crudUsuario.fxml"));
         crudUsuario = new Scene(fxmlCrudUsuario, 1280, 768);
+        
+        Parent fxmlCrudServico = FXMLLoader.load(getClass().getResource("../view/crudServico.fxml"));
+        crudServico = new Scene(fxmlCrudServico, 1280, 768);
         
 
 
@@ -55,6 +59,12 @@ public class Main extends Application {
                 
             case "crudUsuario":
                 stage.setScene(crudUsuario);
+                stage.setResizable(false);
+                stage.setMaximized(true);
+                break;
+                
+            case "crudServico":
+                stage.setScene(crudServico);
                 stage.setResizable(false);
                 stage.setMaximized(true);
                 break;

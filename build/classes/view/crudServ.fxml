@@ -15,15 +15,15 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UsuarioController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ServicoController">
    <children>
       <Pane prefHeight="768.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ToolBar prefHeight="30.0" prefWidth="1280.0">
                <items>
-                  <Button disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Usuarios" />
+                  <Button mnemonicParsing="false" onAction="#crudUsuario" prefHeight="25.0" prefWidth="65.0" text="Usuarios" />
                   <Button mnemonicParsing="false" onAction="#crudMaterial" prefHeight="25.0" prefWidth="65.0" text="Material" />
-                  <Button mnemonicParsing="false" onAction="#crudServico" prefHeight="25.0" prefWidth="65.0" text="Tarefas" />
+                  <Button disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Tarefas" />
                   <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Ajuda" />
                </items>
             </ToolBar>
@@ -35,10 +35,12 @@
                            <items>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                  <children>
-                                    <TableView fx:id="tableViewUsuario" layoutX="23.0" layoutY="33.0" prefHeight="398.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <TableView fx:id="tableViewServico" layoutX="23.0" layoutY="33.0" prefHeight="398.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <columns>
-                                          <TableColumn fx:id="tabColumnUsuarioNome" maxWidth="733.0" prefWidth="320.0" text="NOME" />
-                                          <TableColumn fx:id="tabColumnUsuarioGraduacao" maxWidth="733.0" minWidth="0.0" prefWidth="320.0" text="GRADUAÇÃO" />
+                                          <TableColumn prefWidth="191.0" text="SEÇÃO" />
+                                          <TableColumn prefWidth="191.0" text="TECNICO" />
+                                          <TableColumn fx:id="tabColumnUsuarioNome" maxWidth="733.0" prefWidth="105.0" text="ID MAQUINA" />
+                                          <TableColumn fx:id="tabColumnUsuarioGraduacao" maxWidth="733.0" minWidth="0.0" prefWidth="153.0" text="SITUACAO" />
                                        </columns>
                                     </TableView>
                                  </children>
@@ -50,7 +52,7 @@
                                           <Font name="System Bold" size="24.0" />
                                        </font>
                                     </Label>
-                                    <GridPane layoutX="129.0" layoutY="104.0" prefHeight="227.0" prefWidth="632.0" AnchorPane.bottomAnchor="384.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0">
+                                    <GridPane layoutX="129.0" layoutY="104.0" prefHeight="287.0" prefWidth="632.0" AnchorPane.bottomAnchor="204.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0">
                                        <columnConstraints>
                                           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="372.0" minWidth="10.0" prefWidth="250.0" />
                                           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="314.0" minWidth="0.0" prefWidth="314.0" />
@@ -59,28 +61,37 @@
                                           <RowConstraints maxHeight="60.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="50.0" minHeight="0.0" prefHeight="60.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="60.0" minHeight="0.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="60.0" minHeight="0.0" prefHeight="60.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
-                                          <Label text="ID" />
-                                          <Label text="NOME" GridPane.rowIndex="1" />
-                                          <Label text="GRADUAÇÃO" GridPane.rowIndex="2" />
-                                          <Label prefHeight="17.0" prefWidth="50.0" text="FUNÇÃO" GridPane.rowIndex="3" />
-                                          <Label fx:id="labelUsuarioNome" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <Label fx:id="labelUsuarioGraduacao" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                          <Label fx:id="labelUsuarioFuncao" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                          <Label fx:id="labelUsuarioId" GridPane.columnIndex="1" />
+                                          <Label text="DATA ENTRADA" />
+                                          <Label text="DATA SAIDA" GridPane.rowIndex="1" />
+                                          <Label text="TEC RESPONSAVEL" GridPane.rowIndex="2" />
+                                          <Label prefHeight="17.0" prefWidth="118.0" text="SEÇÃO PERTENCENTE" GridPane.rowIndex="3" />
+                                          <Label fx:id="labelServicoDataSaida" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <Label fx:id="labelServicoTecResp" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <Label fx:id="labelServicoIdMaquina" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                          <Label fx:id="labelServicoDataEntrada" GridPane.columnIndex="1" />
+                                          <Label text="OBSERVAÇÕES" GridPane.rowIndex="4" />
+                                          <Label text="SITUAÇÃO" GridPane.rowIndex="5" />
+                                          <Label prefHeight="17.0" prefWidth="72.0" text="ID MAQUINA" GridPane.rowIndex="6" />
+                                          <Label fx:id="labelServicoSecPert" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <Label fx:id="labelServicoSituacao" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                          <Label fx:id="labelServicoObservacoes" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                        </children>
                                     </GridPane>
                                     <Group layoutX="90.0" layoutY="632.0" AnchorPane.bottomAnchor="150.0" />
                                     <Button layoutX="561.0" layoutY="22.0" mnemonicParsing="false" onAction="#buttonFechaJanela" text="❌" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="12.5" />
                                     <ButtonBar layoutX="14.0" layoutY="677.0" prefHeight="59.0" prefWidth="572.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
-                                      <buttons>
-                                          <Button mnemonicParsing="false" onAction="#handleButtonAlterar" prefHeight="25.0" prefWidth="80.0" text="ATUALIZAR" />
-                                          <Button mnemonicParsing="false" onAction="#handleButtonAlterarSenha" text="ALTERAR SENHA" />
-                                          <Button mnemonicParsing="false" onAction="#handleButtonInserir" prefHeight="25.0" prefWidth="80.0" text="INSERIR" />
-                                          <Button mnemonicParsing="false" onAction="#handleButtonRemove" prefHeight="25.0" prefWidth="80.0" text="EXCLUIR" />
-                                      </buttons>
+                                       <buttons>
+                                          <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="ATUALIZAR" />
+                                          <Button mnemonicParsing="false" text="Dar Baixa" />
+                                          <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="INSERIR" />
+                                          <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="EXCLUIR" />
+                                       </buttons>
                                     </ButtonBar>
                                  </children>
                               </AnchorPane>
