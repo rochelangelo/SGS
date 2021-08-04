@@ -42,5 +42,9 @@ public class inicioController {
     public void crudServico(ActionEvent e){
         Main.changeScreen("crudServico");
     }
+    
+    public void crudMaquina(ActionEvent e){
+        Main.changeScreen("crudMaquina");
+    }
 
 }

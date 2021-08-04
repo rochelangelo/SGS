@@ -24,7 +24,7 @@
                   <Button mnemonicParsing="false" onAction="#crudUsuario" prefHeight="25.0" prefWidth="65.0" text="Usuarios" />
                   <Button mnemonicParsing="false" onAction="#crudMaterial" prefHeight="25.0" prefWidth="65.0" text="Material" />
                   <Button disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Tarefas" />
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Ajuda" />
+                  <Button mnemonicParsing="false" onAction="#crudMaquina" prefHeight="25.0" prefWidth="69.0" text="Maquinas" />
                </items>
             </ToolBar>
             <Pane layoutY="35.0" prefHeight="733.0" prefWidth="1280.0">
@@ -38,16 +38,16 @@
                                     <TableView fx:id="tableViewServico" layoutX="23.0" layoutY="33.0" prefHeight="398.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <columns>
                                           <TableColumn fx:id="tabColumnServicoSecao" prefWidth="191.0" text="SEÇÃO" />
-                                          <TableColumn fx:id="tabColumnServicoTecnico" prefWidth="191.0" text="TECNICO" />
-                                          <TableColumn fx:id="tabColumnServicoIdMaquina" maxWidth="733.0" prefWidth="105.0" text="ID MAQUINA" />
-                                          <TableColumn fx:id="tabColumnServicoSituacao" maxWidth="733.0" minWidth="0.0" prefWidth="153.0" text="SITUACAO" />
+                                          <TableColumn fx:id="tabColumnServicoTecnico" prefWidth="193.0" text="TECNICO" />
+                                          <TableColumn fx:id="tabColumnServicoIdMaquina" maxWidth="733.0" prefWidth="116.0" text="PATRIMONIO MAQ" />
+                                          <TableColumn fx:id="tabColumnServicoSituacao" maxWidth="733.0" minWidth="0.0" prefWidth="140.0" text="SITUACAO" />
                                        </columns>
                                     </TableView>
                                  </children>
                               </AnchorPane>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="625.0">
                                  <children>
-                                    <Label layoutX="228.0" layoutY="18.0" text="DETALHES USUARIO" AnchorPane.leftAnchor="193.5" AnchorPane.rightAnchor="193.5">
+                                    <Label layoutX="254.0" layoutY="20.0" prefHeight="35.0" prefWidth="125.0" text="DETALHES" AnchorPane.leftAnchor="254.0" AnchorPane.rightAnchor="254.0">
                                        <font>
                                           <Font name="System Bold" size="24.0" />
                                        </font>
@@ -87,10 +87,10 @@
                                     <Button layoutX="561.0" layoutY="22.0" mnemonicParsing="false" onAction="#buttonFechaJanela" text="❌" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="12.5" />
                                     <ButtonBar layoutX="14.0" layoutY="677.0" prefHeight="59.0" prefWidth="572.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
                                        <buttons>
-                                          <Button mnemonicParsing="false" onAction="#handleButtonInserir" prefHeight="25.0" prefWidth="80.0" text="INSERIR" />
-                                          <Button mnemonicParsing="false" text="Dar Baixa" />
-                                          <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="ATUALIZAR" />
-                                          <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="EXCLUIR" />
+                                          <Button fx:id="buttonInserir" mnemonicParsing="false" onAction="#handleButtonInserir" prefHeight="25.0" prefWidth="80.0" text="INSERIR" />
+                                          <Button fx:id="buttonDarBaixa" mnemonicParsing="false" onAction="#darBaixa" text="Dar Baixa" />
+                                          <Button fx:id="buttonAtualizar" mnemonicParsing="false" onAction="#handleButtonAlterarObsSituacao" prefHeight="25.0" prefWidth="80.0" text="ATUALIZAR" />
+                                          <Button mnemonicParsing="false" onAction="#handleButtonRemove" prefHeight="25.0" prefWidth="80.0" text="EXCLUIR" />
                                        </buttons>
                                     </ButtonBar>
                                  </children>

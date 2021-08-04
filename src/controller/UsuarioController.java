@@ -112,6 +112,9 @@ public class UsuarioController implements Initializable {
     public void crudServico(ActionEvent e){
         Main.changeScreen("crudServico");
     }
+    public void crudMaquina(ActionEvent e){
+        Main.changeScreen("crudMaquina");
+    }
     
     @FXML
     public void handleButtonInserir() throws IOException{

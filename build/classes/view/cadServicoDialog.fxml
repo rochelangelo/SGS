@@ -13,8 +13,8 @@
    <children>
       <Group layoutX="348.0" layoutY="310.0">
          <children>
-            <Button fx:id="buttonCancelar" layoutX="75.0" mnemonicParsing="false" onAction="#handleButtonCancelar" text="Cancelar" />
             <Button fx:id="buttonCadastrar" mnemonicParsing="false" onAction="#handleButtonConfirmar" text="Cadastrar" />
+            <Button fx:id="buttonCancelar" layoutX="75.0" mnemonicParsing="false" onAction="#handleButtonCancelar" text="Cancelar" />
          </children>
       </Group>
       <GridPane layoutX="200.0" layoutY="155.0" AnchorPane.bottomAnchor="160.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
@@ -29,13 +29,13 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label fx:id="labelServicoTecResp" text="Tecnico Responsavel" />
+            <Label fx:id="labelServicoTecResp" text="Tecnico Responsavel" GridPane.rowIndex="3" />
             <Label fx:id="labelServicoSecReq" text="Seção Requerente" GridPane.rowIndex="1" />
-            <Label fx:id="labelServicoIdMaquina" text="Id Maquina" GridPane.rowIndex="3" />
-            <TextField fx:id="textFieldServicoTecRep" GridPane.columnIndex="1" />
+            <Label fx:id="labelServicoIdMaquina" text="Patrimonio Maquina" />
+            <TextField fx:id="textFieldServicoPatrimonioMaquina" onAction="#populaForm" GridPane.columnIndex="1" />
             <TextField fx:id="textFieldServicoSecReq" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="textFieldMatrialQuantidade" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <TextField fx:id="textFieldServicoObs" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="textFieldServicoTecRep" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label fx:id="labelServicoObservacoes" text="Observações" GridPane.rowIndex="2" />
          </children>
       </GridPane>

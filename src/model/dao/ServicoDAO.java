@@ -33,7 +33,7 @@ public class ServicoDAO {
     }
     
     public boolean inserir(Servico servico){
-        String sql = "INSERT INTO servicos (dataentrada, datasaida, tecnicoresponsavel, secaoresponsavel, observacoes, situacao, idmaquina)VALUES(?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO servicos (dataentrada, datasaida, tecnicoresponsavel, secaoresponsavel, observacoes, situacao, patrimonio_maquina)VALUES(?,?,?,?,?,?,?)";
         
         try{
             PreparedStatement stmt = connection.prepareStatement(sql);
@@ -43,7 +43,7 @@ public class ServicoDAO {
             stmt.setString(4, servico.getSecaoRequerente());
             stmt.setString(5, servico.getObservacao());
             stmt.setString(6, servico.getSituacao());
-            stmt.setInt(7, servico.getIdMaquina());
+            stmt.setInt(7, servico.getPatrimonioMaquina());
             stmt.execute();
             return true;
                         
@@ -53,12 +53,26 @@ public class ServicoDAO {
         }
     }
     
-    public boolean alterarSituacaoObservacao(Servico servico) {
-        String sql = "UPDATE servicos SET observacoes=?, situacao=? WHERE id=?";
+    public boolean alterarObservacao(Servico servico) {
+        String sql = "UPDATE servicos SET observacoes=? WHERE id=?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, servico.getObservacao());
-            stmt.setString(2, servico.getSituacao());
+            stmt.setInt(2, servico.getId());
+            stmt.execute();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+    
+    public boolean alterarSituação(Servico servico) {
+        String sql = "UPDATE servicos SET situacao=?, datasaida=? WHERE id=?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, servico.getSituacao());
+            stmt.setDate(2, (Date) servico.getDataSaida());
             stmt.setInt(3, servico.getId());
             stmt.execute();
             return true;
@@ -96,7 +110,7 @@ public class ServicoDAO {
                 servico.setSecaoRequerente(resultado.getString("secaoresponsavel"));
                 servico.setObservacao(resultado.getString("observacoes"));
                 servico.setSituacao(resultado.getString("situacao"));
-                servico.setIdMaquina(resultado.getInt("idmaquina"));
+                servico.setPatrimonioMaquina(resultado.getInt("patrimonio_maquina"));
                 retorno.add(servico);
             }
         } catch (SQLException ex) {
@@ -120,7 +134,7 @@ public class ServicoDAO {
                 servico.setSecaoRequerente(resultado.getString("secaoresponsavel"));
                 servico.setObservacao(resultado.getString("observacoes"));
                 servico.setSituacao(resultado.getString("situacao"));
-                servico.setIdMaquina(resultado.getInt("idmaquina"));
+                servico.setPatrimonioMaquina(resultado.getInt("patrimonio_maquina"));
                 retorno = servico;
             }
         } catch (SQLException ex) {

@@ -24,7 +24,7 @@
                   <Button disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Usuarios" />
                   <Button mnemonicParsing="false" onAction="#crudMaterial" prefHeight="25.0" prefWidth="65.0" text="Material" />
                   <Button mnemonicParsing="false" onAction="#crudServico" prefHeight="25.0" prefWidth="65.0" text="Tarefas" />
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Ajuda" />
+                  <Button mnemonicParsing="false" onAction="#crudMaquina" prefHeight="25.0" prefWidth="69.0" text="Maquinas" />
                </items>
             </ToolBar>
             <Pane layoutY="35.0" prefHeight="733.0" prefWidth="1280.0">
