@@ -1,4 +1,4 @@
-    /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -21,36 +21,41 @@ import model.bean.Usuario;
  * @author r-r20
  */
 public class UsuarioDAO {
-    
+
     private Connection connection;
-    
-    public Connection getConnection(){
+
+    public Connection getConnection() {
         return connection;
     }
-    
-    public void setConnection(Connection connection){
+
+    public void setConnection(Connection connection) {
         this.connection = connection;
     }
-    
-    public boolean inserir(Usuario usuario){
+
+    public boolean inserir(Usuario usuario) {
         String sql = "INSERT INTO usuarios (nome, graduacao, funcao, senha, login)VALUES(?,?,?,?,?)";
-        
-        try{
+
+        try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, usuario.getNome());
             stmt.setString(2, usuario.getGraduacao());
             stmt.setString(3, usuario.getFuncao());
             stmt.setString(4, usuario.getSenha());
-            stmt.setString(5, usuario.getLogin());
+            stmt.setString(5, formataDados(usuario.getLogin()));
             stmt.execute();
             return true;
-                        
-        }catch (SQLException ex) {
+
+        } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
     }
-    
+
+    public static String formataDados(String dado) {
+        dado = dado.replaceAll(" ", "");
+        return dado;
+    }
+
     public boolean alterar(Usuario usuario) {
         String sql = "UPDATE usuarios SET nome=?, graduacao=?, funcao=? WHERE id=?";
         try {
@@ -66,7 +71,7 @@ public class UsuarioDAO {
             return false;
         }
     }
-    
+
     public boolean alterarSenha(Usuario usuario) {
         String sql = "UPDATE usuarios SET senha=? WHERE id=?";
         try {
@@ -80,7 +85,7 @@ public class UsuarioDAO {
             return false;
         }
     }
-    
+
     public boolean remover(Usuario usuario) {
         String sql = "DELETE FROM usuarios WHERE id=?";
         try {
@@ -93,7 +98,7 @@ public class UsuarioDAO {
             return false;
         }
     }
-    
+
     public List<Usuario> listar() {
         String sql = "SELECT * FROM usuarios";
         List<Usuario> retorno = new ArrayList<>();
@@ -115,7 +120,7 @@ public class UsuarioDAO {
         }
         return retorno;
     }
-    
+
     public Usuario buscar(Usuario usuario) {
         String sql = "SELECT * FROM usuarios WHERE id=?";
         Usuario retorno = new Usuario();
@@ -137,24 +142,23 @@ public class UsuarioDAO {
         }
         return retorno;
     }
-    
-    public Boolean existenciaUsuario(String nome){
+
+    public Boolean existenciaUsuario(String nome) {
         String sql = "SELECT * FROM usuarios WHERE nome=?";
         boolean resul = false;
-        try{
+        try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, nome);
             ResultSet resultado = stmt.executeQuery();
             String nResul = resultado.getString("nome");
-            if(nResul.equals(nome)){
+            if (nResul.equals(nome)) {
                 resul = true;
             }
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return resul;
     }
 
-    
 }

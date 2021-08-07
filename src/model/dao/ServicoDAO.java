@@ -11,7 +11,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.bean.Servico;
@@ -141,6 +143,36 @@ public class ServicoDAO {
             Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return retorno;
+    }
+    
+    public Map<Integer, ArrayList> listaQuantidadeServicosMes(){
+        String sql = "SELECT count(id), extract (year from dataEntrada) as ano, extract(month from dataEntrada) as mes from servicos group by ano, mes order by ano, mes";
+        Map<Integer, ArrayList> retorno = new HashMap();
+        
+        try{
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet resultado = stmt.executeQuery();
+            
+            while(resultado.next()){
+                ArrayList linha = new ArrayList();
+                if(!retorno.containsKey(resultado.getInt("ano"))){
+                    linha.add(resultado.getInt("mes"));
+                    linha.add(resultado.getInt("count"));
+                    retorno.put(resultado.getInt("ano"), linha);
+                }else{
+                    ArrayList linhaNova = retorno.get(resultado.getInt("ano"));
+                    linhaNova.add(resultado.getInt("mes"));
+                    linhaNova.add(resultado.getInt("count"));
+                }
+            }
+                    
+            return retorno;
+        }catch(SQLException ex){
+            Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return retorno;
+        
     }
     
 }

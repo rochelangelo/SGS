@@ -88,6 +88,9 @@ public class MaquinaController implements Initializable {
     public void crudMaterial(ActionEvent e){
         Main.changeScreen("crudMaterial ");
     }
+    public void graficos(ActionEvent e){
+        Main.changeScreen("graficos");
+    }
     
     public void selecionarItemTableViewMaquina(Maquina maquina) {
         if (maquina != null) {
