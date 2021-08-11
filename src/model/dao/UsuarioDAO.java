@@ -120,6 +120,27 @@ public class UsuarioDAO {
         }
         return retorno;
     }
+    public List<String> listarNome(){
+        String sql = "SELECT * FROM usuarios WHERE graduacao NOT LIKE '%Tenente'";
+        List<String> retorno = new ArrayList<>();
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet resultado = stmt.executeQuery();
+            while (resultado.next()) {
+                Usuario usuario = new Usuario();
+                usuario.setId(resultado.getInt("id"));
+                usuario.setNome(resultado.getString("nome"));
+                usuario.setGraduacao(resultado.getString("graduacao"));
+                usuario.setFuncao(resultado.getString("funcao"));
+                usuario.setSenha(resultado.getString("senha"));
+                usuario.setLogin(resultado.getString("login"));
+                retorno.add(usuario.getNome());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return retorno;
+    }
 
     public Usuario buscar(Usuario usuario) {
         String sql = "SELECT * FROM usuarios WHERE id=?";

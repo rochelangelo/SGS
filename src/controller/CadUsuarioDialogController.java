@@ -7,10 +7,15 @@ package controller;
 
 import java.net.URL;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -33,13 +38,18 @@ public class CadUsuarioDialogController implements Initializable {
     @FXML
     private TextField textFieldUsuarioNome;
     @FXML
-    private TextField textFieldUsuarioGraduacao;
-    @FXML
     private TextField textFieldUsuarioFuncao;
+    @FXML
+    private ComboBox<String> graduacao;
     @FXML
     private Button buttonCadastrar;
     @FXML
     private Button buttonCancelar;
+    
+    
+    private List<String> listGraduacao = new ArrayList<String>();
+    private ObservableList<String> ObservableListGraduacao;
+     
 
     private Stage dialogStage;
     private boolean buttonConfirmClick = false;
@@ -50,7 +60,18 @@ public class CadUsuarioDialogController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        listGraduacao.add("1º Tenente");
+        listGraduacao.add("2º Tenente");
+        listGraduacao.add("1º Sargento");
+        listGraduacao.add("2º Sargento");
+        listGraduacao.add("3º Sargento");
+        listGraduacao.add("Cabo");
+        listGraduacao.add("Soldado");
+        
+        
+        ObservableListGraduacao = FXCollections.observableList(listGraduacao);
+        
+        this.graduacao.setItems(ObservableListGraduacao);
     }    
 
     /**
@@ -94,7 +115,7 @@ public class CadUsuarioDialogController implements Initializable {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
         this.textFieldUsuarioNome.setText(usuario.getNome());
-        this.textFieldUsuarioGraduacao.setText(usuario.getGraduacao());
+        this.graduacao.setValue(usuario.getGraduacao());
         this.textFieldUsuarioFuncao.setText(usuario.getFuncao());
     }
     
@@ -103,7 +124,7 @@ public class CadUsuarioDialogController implements Initializable {
         String login = textFieldUsuarioNome.getText().toLowerCase();
         
         usuario.setNome(textFieldUsuarioNome.getText());
-        usuario.setGraduacao(textFieldUsuarioGraduacao.getText());
+        usuario.setGraduacao(graduacao.getSelectionModel().getSelectedItem());
         usuario.setFuncao(textFieldUsuarioFuncao.getText());
         usuario.setSenha(login);
         usuario.setLogin(login);

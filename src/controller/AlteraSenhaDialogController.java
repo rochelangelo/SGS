@@ -81,6 +81,7 @@ public class AlteraSenhaDialogController {
      */
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+        this.passwordSenhaAtual.setText(usuario.getSenha());
     }
     
     

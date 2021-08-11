@@ -10,20 +10,26 @@ import java.net.URL;
 import java.sql.Connection;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.bean.Maquina;
 import model.bean.Servico;
+import model.bean.Usuario;
 import model.dao.MaquinaDAO;
+import model.dao.UsuarioDAO;
 import model.dao.database.Database;
 import model.dao.database.DatabaseFactory;
 
@@ -40,7 +46,7 @@ public class CadServicoDialogController implements Initializable {
     @FXML
     private Label labelServicoObservacoes;
     @FXML
-    private TextField textFieldServicoTecRep;
+    private ComboBox<String> tecnico;
     @FXML
     private TextField textFieldServicoSecReq;
     @FXML
@@ -56,14 +62,25 @@ public class CadServicoDialogController implements Initializable {
     private boolean buttonConfirmClick = false;
     private Servico servico;
     
+    private List<String> listUsuario;
+    private ObservableList<String> ObservableListUsuario;
+    
+    
      //Atributos para Manipulacao BD
     private final Database database = DatabaseFactory.getDatabase("postgresql");
     private final Connection connection = database.conectar();
     private final MaquinaDAO maquinaDAO = new MaquinaDAO();
+    private final UsuarioDAO usuarioDAO = new UsuarioDAO();
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         maquinaDAO.setConnection(connection);
+        usuarioDAO.setConnection(connection);
+        listUsuario = usuarioDAO.listarNome();
+        ObservableListUsuario = FXCollections.observableList(listUsuario);
+        
+        this.tecnico.setItems(ObservableListUsuario);
     }
 
     /**
@@ -108,7 +125,7 @@ public class CadServicoDialogController implements Initializable {
         this.servico = servico;
         this.textFieldServicoPatrimonioMaquina.setText(String.valueOf(servico.getPatrimonioMaquina()));
         this.textFieldServicoSecReq.setText(servico.getSecaoRequerente());
-        this.textFieldServicoTecRep.setText(servico.getTecnicoResponsavel());
+        this.tecnico.setValue(servico.getTecnicoResponsavel());
         this.textFieldServicoObs.setText(servico.getObservacao());
     }
     
@@ -159,7 +176,7 @@ public class CadServicoDialogController implements Initializable {
         servico.setDataEntrada(new java.sql.Date(data.getTime()));
         servico.setDataSaida(null);
         servico.setSecaoRequerente(textFieldServicoSecReq.getText());
-        servico.setTecnicoResponsavel(textFieldServicoTecRep.getText());
+        servico.setTecnicoResponsavel(tecnico.getValue());
         servico.setObservacao(textFieldServicoObs.getText());
         servico.setPatrimonioMaquina(Integer.parseInt(textFieldServicoPatrimonioMaquina.getText()));
         servico.setSituacao("EM AGUARDO"); // "EM AGUARDO" "EM MANUTENCAO" "FINALIZADO" "SEM SOLUCAO"
