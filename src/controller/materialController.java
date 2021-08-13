@@ -21,6 +21,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 import model.bean.Material;
 import model.dao.MaterialDAO;
 import model.dao.database.Database;
@@ -144,6 +145,20 @@ public class materialController implements Initializable {
                 materialDAO.alterar(material);
                 carregarTableViewMateriais();
             }
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Por favor, selecionar um Material!");
+            alert.show();
+        }
+    }
+    
+    @FXML
+    public void handleButtonRetirar() throws IOException{
+        Material material = tableViewMaterial.getSelectionModel().getSelectedItem();
+        if(material != null){
+            int qtd = Integer.parseInt(JOptionPane.showInputDialog("Digite a quantidade:"));
+            materialDAO.retirarMaterial(material, qtd);
+            carregarTableViewMateriais();
         }else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Por favor, selecionar um Material!");

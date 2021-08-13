@@ -39,7 +39,14 @@ import model.dao.database.DatabaseFactory;
 public class ServicoController implements Initializable {
 
     @FXML
-    private TableView<Servico> tableViewServico;
+    private TableView<Servico> tableViewServicoAguardo;
+    @FXML
+    private TableView<Servico> tableViewServicoManutencao;
+    @FXML
+    private TableView<Servico> tableViewServicoFinalizado;
+    @FXML
+    private TableView<Servico> tableViewServicoSolucao;
+    
     @FXML
     private TableColumn<Servico, String> tabColumnServicoSecao;
     @FXML
@@ -48,6 +55,34 @@ public class ServicoController implements Initializable {
     private TableColumn<Servico, String> tabColumnServicoIdMaquina;
     @FXML
     private TableColumn<Servico, String> tabColumnServicoSituacao;
+    
+    @FXML
+    private TableColumn<Servico, String> tabColumnServicoSecao1;
+    @FXML
+    private TableColumn<Servico, String> tabColumnServicoTecnico1;
+    @FXML
+    private TableColumn<Servico, String> tabColumnServicoIdMaquina1;
+    @FXML
+    private TableColumn<Servico, String> tabColumnServicoSituacao1;
+    
+    @FXML
+    private TableColumn<Servico, String> tabColumnServicoSecao2;
+    @FXML
+    private TableColumn<Servico, String> tabColumnServicoTecnico2;
+    @FXML
+    private TableColumn<Servico, String> tabColumnServicoIdMaquina2;
+    @FXML
+    private TableColumn<Servico, String> tabColumnServicoSituacao2;
+    
+    @FXML
+    private TableColumn<Servico, String> tabColumnServicoSecao3;
+    @FXML
+    private TableColumn<Servico, String> tabColumnServicoTecnico3;
+    @FXML
+    private TableColumn<Servico, String> tabColumnServicoIdMaquina3;
+    @FXML
+    private TableColumn<Servico, String> tabColumnServicoSituacao3;
+    
     @FXML
     private Label labelServicoDataEntrada;
     @FXML
@@ -69,8 +104,16 @@ public class ServicoController implements Initializable {
     @FXML
     private Button buttonInserir;
 
-    private List<Servico> listServico;
-    private ObservableList<Servico> ObservableListServico;
+    private List<Servico> listServicoAguardo;
+    private List<Servico> listServicoManutencao;
+    private List<Servico> listServicoFinalizado;
+    private List<Servico> listServicoSolucao;
+    private ObservableList<Servico> ObservableListServicoAguardo;
+    private ObservableList<Servico> ObservableListServicoMatutencao;
+    private ObservableList<Servico> ObservableListServicoFinalizado;
+    private ObservableList<Servico> ObservableListServicoSolucao;
+    
+    private String tipoServico;
 
     //Atributos para Manipulacao BD
     private final Database database = DatabaseFactory.getDatabase("postgresql");
@@ -83,7 +126,13 @@ public class ServicoController implements Initializable {
         carregarTableViewServico();
 
         //Listen acionado sempre que um item da lista for selecionado na TableView Materias
-        tableViewServico.getSelectionModel().selectedItemProperty().addListener(
+        tableViewServicoAguardo.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> selecionarItemTableViewUsuario(newValue));
+        tableViewServicoManutencao.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> selecionarItemTableViewUsuario(newValue));
+        tableViewServicoFinalizado.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> selecionarItemTableViewUsuario(newValue));
+        tableViewServicoSolucao.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> selecionarItemTableViewUsuario(newValue));
 
     }
@@ -113,14 +162,43 @@ public class ServicoController implements Initializable {
         tabColumnServicoTecnico.setCellValueFactory(new PropertyValueFactory<>("tecnicoResponsavel"));
         tabColumnServicoIdMaquina.setCellValueFactory(new PropertyValueFactory<>("patrimonioMaquina"));
         tabColumnServicoSituacao.setCellValueFactory(new PropertyValueFactory<>("situacao"));
+        
+        tabColumnServicoSecao1.setCellValueFactory(new PropertyValueFactory<>("secaoRequerente"));
+        tabColumnServicoTecnico1.setCellValueFactory(new PropertyValueFactory<>("tecnicoResponsavel"));
+        tabColumnServicoIdMaquina1.setCellValueFactory(new PropertyValueFactory<>("patrimonioMaquina"));
+        tabColumnServicoSituacao1.setCellValueFactory(new PropertyValueFactory<>("situacao"));
+        
+        tabColumnServicoSecao2.setCellValueFactory(new PropertyValueFactory<>("secaoRequerente"));
+        tabColumnServicoTecnico2.setCellValueFactory(new PropertyValueFactory<>("tecnicoResponsavel"));
+        tabColumnServicoIdMaquina2.setCellValueFactory(new PropertyValueFactory<>("patrimonioMaquina"));
+        tabColumnServicoSituacao2.setCellValueFactory(new PropertyValueFactory<>("situacao"));
+        
+        tabColumnServicoSecao3.setCellValueFactory(new PropertyValueFactory<>("secaoRequerente"));
+        tabColumnServicoTecnico3.setCellValueFactory(new PropertyValueFactory<>("tecnicoResponsavel"));
+        tabColumnServicoIdMaquina3.setCellValueFactory(new PropertyValueFactory<>("patrimonioMaquina"));
+        tabColumnServicoSituacao3.setCellValueFactory(new PropertyValueFactory<>("situacao"));
 
-        listServico = servicoDAO.listar();
-
-        ObservableListServico = FXCollections.observableArrayList(listServico);
-        tableViewServico.setItems(ObservableListServico);
+        listServicoAguardo = servicoDAO.listarEmAguardo();
+        ObservableListServicoAguardo = FXCollections.observableArrayList(listServicoAguardo);
+        tableViewServicoAguardo.setItems(ObservableListServicoAguardo);
+        
+        listServicoFinalizado = servicoDAO.listarFinalizado();
+        ObservableListServicoFinalizado = FXCollections.observableArrayList(listServicoFinalizado);
+        tableViewServicoFinalizado.setItems(ObservableListServicoFinalizado);
+        
+        listServicoManutencao = servicoDAO.listarEmManutencao();
+        ObservableListServicoMatutencao = FXCollections.observableArrayList(listServicoManutencao);
+        tableViewServicoManutencao.setItems(ObservableListServicoMatutencao);
+        
+        listServicoSolucao = servicoDAO.listarSemSolucao();
+        ObservableListServicoSolucao = FXCollections.observableArrayList(listServicoSolucao);
+        tableViewServicoSolucao.setItems(ObservableListServicoSolucao);
     }
 
     public void selecionarItemTableViewUsuario(Servico servico) {
+        
+        this.tipoServico = servico.getSituacao();
+        
         if (servico != null) {
             labelServicoDataEntrada.setText(melhoraData(servico.getDataEntrada()));
             if (servico.getDataSaida() != null) {
@@ -180,56 +258,156 @@ public class ServicoController implements Initializable {
     }
     
     @FXML
-    public void handleButtonRemove() throws IOException {
-        Servico servico = tableViewServico.getSelectionModel().getSelectedItem();
-        if(servico != null){
-            servicoDAO.remover(servico);
-            carregarTableViewServico();
-        }else{
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Por favor, selecionar um Serviço!");
-            alert.show();
+    public void handleButtonRemove() throws IOException { 
+        if (this.tipoServico.equals("EM AGUARDO")) {
+            Servico servico = tableViewServicoAguardo.getSelectionModel().getSelectedItem();
+            if (servico != null) {
+                servicoDAO.remover(servico);
+                carregarTableViewServico();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Por favor, selecionar um Serviço!");
+                alert.show();
+            }
+        }else if(this.tipoServico.equals("FINALIZADO")){
+            Servico servico = tableViewServicoFinalizado.getSelectionModel().getSelectedItem();
+            if (servico != null) {
+                servicoDAO.remover(servico);
+                carregarTableViewServico();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Por favor, selecionar um Serviço!");
+                alert.show();
+            }
+        }else if(this.tipoServico.equals("EM MANUTENCAO")){
+            Servico servico = tableViewServicoManutencao.getSelectionModel().getSelectedItem();
+            if (servico != null) {
+                servicoDAO.remover(servico);
+                carregarTableViewServico();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Por favor, selecionar um Serviço!");
+                alert.show();
+            }
+        }else if(this.tipoServico.equals("SEM SOLUÇÃO")){
+            Servico servico = tableViewServicoSolucao.getSelectionModel().getSelectedItem();
+            if (servico != null) {
+                servicoDAO.remover(servico);
+                carregarTableViewServico();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Por favor, selecionar um Serviço!");
+                alert.show();
+            }
         }
     }
 
     public void handleButtonAlterarObsSituacao() throws IOException {
-        Servico servico = tableViewServico.getSelectionModel().getSelectedItem();
-        if (servico != null) {
-            boolean buttonConfirmarClick = showAltCadServicoDialog(servico);
-            if (buttonConfirmarClick) {
-                servicoDAO.alterarObservacao(servico);
-                carregarTableViewServico();
+        if (this.tipoServico.equals("EM AGUARDO")) {
+            Servico servico = tableViewServicoAguardo.getSelectionModel().getSelectedItem();
+            if (servico != null) {
+                boolean buttonConfirmarClick = showAltCadServicoDialog(servico);
+                if (buttonConfirmarClick) {
+                    servicoDAO.alterarObservacao(servico);
+                    carregarTableViewServico();
+                }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Por favor, selecionar um Serviço!");
+                alert.show();
             }
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Por favor, selecionar um Serviço!");
-            alert.show();
+        }else if(this.tipoServico.equals("FINALIZADO")){
+            Servico servico = tableViewServicoFinalizado.getSelectionModel().getSelectedItem();
+            if (servico != null) {
+                boolean buttonConfirmarClick = showAltCadServicoDialog(servico);
+                if (buttonConfirmarClick) {
+                    servicoDAO.alterarObservacao(servico);
+                    carregarTableViewServico();
+                }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Por favor, selecionar um Serviço!");
+                alert.show();
+            }
+        }else if(this.tipoServico.equals("EM MANUTENCAO")){
+            Servico servico = tableViewServicoManutencao.getSelectionModel().getSelectedItem();
+            if (servico != null) {
+                boolean buttonConfirmarClick = showAltCadServicoDialog(servico);
+                if (buttonConfirmarClick) {
+                    servicoDAO.alterarObservacao(servico);
+                    carregarTableViewServico();
+                }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Por favor, selecionar um Serviço!");
+                alert.show();
+            }
+        }else if (this.tipoServico.equals("SEM SOLUÇÃO")) {
+            Servico servico = tableViewServicoSolucao.getSelectionModel().getSelectedItem();
+            if (servico != null) {
+                boolean buttonConfirmarClick = showAltCadServicoDialog(servico);
+                if (buttonConfirmarClick) {
+                    servicoDAO.alterarObservacao(servico);
+                    carregarTableViewServico();
+                }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Por favor, selecionar um Serviço!");
+                alert.show();
+            }
         }
     }
 
     public void darBaixa() {
-        Servico servico = tableViewServico.getSelectionModel().getSelectedItem();
-        if (servico != null) {
-            String[] situacao = new String[2];
-            situacao[0] = "FINALIZADO";
-            situacao[1] = "SEM SOLUÇÃO";
+        if (this.tipoServico.equals("EM AGUARDO")) {
+            Servico servico = tableViewServicoAguardo.getSelectionModel().getSelectedItem();
+            System.out.println(servico.getId());
+            if (servico != null) {
+                String[] situacao = new String[2];
+                situacao[0] = "FINALIZADO";
+                situacao[1] = "SEM SOLUÇÃO";
 
-            int reply = JOptionPane.showConfirmDialog(null, "    TEVE SOLUÇÃO?", "SITUAÇÃO", JOptionPane.YES_NO_OPTION);
+                int reply = JOptionPane.showConfirmDialog(null, "    TEVE SOLUÇÃO?", "SITUAÇÃO", JOptionPane.YES_NO_OPTION);
 
-            if (reply == JOptionPane.YES_OPTION) {
-               servico.setSituacao(situacao[0]); 
-            }else{
-                servico.setSituacao(situacao[1]);
+                if (reply == JOptionPane.YES_OPTION) {
+                    servico.setSituacao(situacao[0]);
+                } else {
+                    servico.setSituacao(situacao[1]);
+                }
+
+                Date data = new Date();
+                servico.setDataSaida(new java.sql.Date(data.getTime()));
+                servicoDAO.alterarSituação(servico);
+                carregarTableViewServico();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Por favor, selecionar um Serviço!");
+                alert.show();
             }
-            
-            Date data = new Date();
-            servico.setDataSaida(new java.sql.Date(data.getTime()));
-            servicoDAO.alterarSituação(servico);
-            carregarTableViewServico();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Por favor, selecionar um Serviço!");
-            alert.show();
+        }else if(this.tipoServico.equals("EM MANUTENCAO")){
+            Servico servico = tableViewServicoManutencao.getSelectionModel().getSelectedItem();
+            if (servico != null) {
+                String[] situacao = new String[2];
+                situacao[0] = "FINALIZADO";
+                situacao[1] = "SEM SOLUÇÃO";
+
+                int reply = JOptionPane.showConfirmDialog(null, "    TEVE SOLUÇÃO?", "SITUAÇÃO", JOptionPane.YES_NO_OPTION);
+
+                if (reply == JOptionPane.YES_OPTION) {
+                    servico.setSituacao(situacao[0]);
+                } else {
+                    servico.setSituacao(situacao[1]);
+                }
+
+                Date data = new Date();
+                servico.setDataSaida(new java.sql.Date(data.getTime()));
+                servicoDAO.alterarSituação(servico);
+                carregarTableViewServico();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Por favor, selecionar um Serviço!");
+                alert.show();
+            }
         }
     }
 

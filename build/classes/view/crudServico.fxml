@@ -5,6 +5,8 @@
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.ToolBar?>
@@ -36,14 +38,74 @@
                            <items>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                  <children>
-                                    <TableView fx:id="tableViewServico" layoutX="23.0" layoutY="33.0" prefHeight="398.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <columns>
-                                          <TableColumn fx:id="tabColumnServicoSecao" prefWidth="191.0" text="SEÇÃO" />
-                                          <TableColumn fx:id="tabColumnServicoTecnico" prefWidth="193.0" text="TECNICO" />
-                                          <TableColumn fx:id="tabColumnServicoIdMaquina" maxWidth="733.0" prefWidth="116.0" text="PATRIMONIO MAQ" />
-                                          <TableColumn fx:id="tabColumnServicoSituacao" maxWidth="733.0" minWidth="0.0" prefWidth="140.0" text="SITUACAO" />
-                                       </columns>
-                                    </TableView>
+                                    <TabPane prefHeight="731.0" prefWidth="640.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <tabs>
+                                        <Tab text="EM AGUARDO">
+                                          <content>
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="640.0">
+                                                   <children>
+                                                      <TableView fx:id="tableViewServicoAguardo" prefHeight="551.0" prefWidth="640.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <columns>
+                                                            <TableColumn fx:id="tabColumnServicoSecao" prefWidth="191.0" text="SEÇÃO" />
+                                                            <TableColumn fx:id="tabColumnServicoTecnico" prefWidth="193.0" text="TECNICO" />
+                                                            <TableColumn fx:id="tabColumnServicoIdMaquina" maxWidth="733.0" prefWidth="116.0" text="PATRIMONIO MAQ" />
+                                                            <TableColumn fx:id="tabColumnServicoSituacao" maxWidth="733.0" minWidth="0.0" prefWidth="140.0" text="SITUACAO" />
+                                                         </columns>
+                                                      </TableView>
+                                                   </children>
+                                                </AnchorPane>
+                                          </content>
+                                        </Tab>
+                                          <Tab text="EM MANUTENÇÃO">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="640.0">
+                                                   <children>
+                                                      <TableView fx:id="tableViewServicoManutencao" prefHeight="702.0" prefWidth="640.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <columns>
+                                                            <TableColumn fx:id="tabColumnServicoSecao1" prefWidth="191.0" text="SEÇÃO" />
+                                                            <TableColumn fx:id="tabColumnServicoTecnico1" prefWidth="193.0" text="TECNICO" />
+                                                            <TableColumn fx:id="tabColumnServicoIdMaquina1" maxWidth="733.0" prefWidth="116.0" text="PATRIMONIO MAQ" />
+                                                            <TableColumn fx:id="tabColumnServicoSituacao1" maxWidth="733.0" minWidth="0.0" prefWidth="140.0" text="SITUACAO" />
+                                                         </columns>
+                                                      </TableView>
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                          </Tab>
+                                        <Tab text="FINALIZADO">
+                                          <content>
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <TableView fx:id="tableViewServicoFinalizado" prefHeight="702.0" prefWidth="640.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <columns>
+                                                            <TableColumn fx:id="tabColumnServicoSecao2" prefWidth="191.0" text="SEÇÃO" />
+                                                            <TableColumn fx:id="tabColumnServicoTecnico2" prefWidth="193.0" text="TECNICO" />
+                                                            <TableColumn fx:id="tabColumnServicoIdMaquina2" maxWidth="733.0" prefWidth="116.0" text="PATRIMONIO MAQ" />
+                                                            <TableColumn fx:id="tabColumnServicoSituacao2" maxWidth="733.0" minWidth="0.0" prefWidth="140.0" text="SITUACAO" />
+                                                         </columns>
+                                                      </TableView>
+                                                   </children>
+                                                </AnchorPane>
+                                          </content>
+                                        </Tab>
+                                          <Tab text="SEM SOLUÇÃO">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <TableView fx:id="tableViewServicoSolucao" prefHeight="702.0" prefWidth="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <columns>
+                                                            <TableColumn fx:id="tabColumnServicoSecao3" prefWidth="191.0" text="SEÇÃO" />
+                                                            <TableColumn fx:id="tabColumnServicoTecnico3" prefWidth="193.0" text="TECNICO" />
+                                                            <TableColumn fx:id="tabColumnServicoIdMaquina3" maxWidth="733.0" prefWidth="116.0" text="PATRIMONIO MAQ" />
+                                                            <TableColumn fx:id="tabColumnServicoSituacao3" maxWidth="733.0" minWidth="0.0" prefWidth="140.0" text="SITUACAO" />
+                                                         </columns>
+                                                      </TableView>
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                          </Tab>
+                                      </tabs>
+                                    </TabPane>
                                  </children>
                               </AnchorPane>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="625.0">

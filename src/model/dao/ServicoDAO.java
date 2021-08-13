@@ -121,6 +121,98 @@ public class ServicoDAO {
         return retorno;
     }
     
+    public List<Servico> listarEmAguardo() {
+        String sql = "SELECT * FROM servicos WHERE situacao='EM AGUARDO' ORDER BY dataentrada ASC";
+        List<Servico> retorno = new ArrayList<>();
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet resultado = stmt.executeQuery();
+            while (resultado.next()) {
+                Servico servico = new Servico();
+                servico.setId(resultado.getInt("id"));
+                servico.setDataEntrada(resultado.getDate("dataentrada"));
+                servico.setDataSaida(resultado.getDate("datasaida"));
+                servico.setTecnicoResponsavel(resultado.getString("tecnicoresponsavel"));
+                servico.setSecaoRequerente(resultado.getString("secaoresponsavel"));
+                servico.setObservacao(resultado.getString("observacoes"));
+                servico.setSituacao(resultado.getString("situacao"));
+                servico.setPatrimonioMaquina(resultado.getInt("patrimonio_maquina"));
+                retorno.add(servico);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return retorno;
+    }
+    public List<Servico> listarEmManutencao() {
+        String sql = "SELECT * FROM servicos WHERE situacao='EM MANUTENÇÃO' ORDER BY dataentrada ASC";
+        List<Servico> retorno = new ArrayList<>();
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet resultado = stmt.executeQuery();
+            while (resultado.next()) {
+                Servico servico = new Servico();
+                servico.setId(resultado.getInt("id"));
+                servico.setDataEntrada(resultado.getDate("dataentrada"));
+                servico.setDataSaida(resultado.getDate("datasaida"));
+                servico.setTecnicoResponsavel(resultado.getString("tecnicoresponsavel"));
+                servico.setSecaoRequerente(resultado.getString("secaoresponsavel"));
+                servico.setObservacao(resultado.getString("observacoes"));
+                servico.setSituacao(resultado.getString("situacao"));
+                servico.setPatrimonioMaquina(resultado.getInt("patrimonio_maquina"));
+                retorno.add(servico);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return retorno;
+    }
+    public List<Servico> listarFinalizado() {
+        String sql = "SELECT * FROM servicos WHERE situacao='FINALIZADO' ORDER BY dataentrada ASC";
+        List<Servico> retorno = new ArrayList<>();
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet resultado = stmt.executeQuery();
+            while (resultado.next()) {
+                Servico servico = new Servico();
+                servico.setId(resultado.getInt("id"));
+                servico.setDataEntrada(resultado.getDate("dataentrada"));
+                servico.setDataSaida(resultado.getDate("datasaida"));
+                servico.setTecnicoResponsavel(resultado.getString("tecnicoresponsavel"));
+                servico.setSecaoRequerente(resultado.getString("secaoresponsavel"));
+                servico.setObservacao(resultado.getString("observacoes"));
+                servico.setSituacao(resultado.getString("situacao"));
+                servico.setPatrimonioMaquina(resultado.getInt("patrimonio_maquina"));
+                retorno.add(servico);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return retorno;
+    }public List<Servico> listarSemSolucao() {
+        String sql = "SELECT * FROM servicos WHERE situacao='SEM SOLUÇÃO' ORDER BY dataentrada ASC";
+        List<Servico> retorno = new ArrayList<>();
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet resultado = stmt.executeQuery();
+            while (resultado.next()) {
+                Servico servico = new Servico();
+                servico.setId(resultado.getInt("id"));
+                servico.setDataEntrada(resultado.getDate("dataentrada"));
+                servico.setDataSaida(resultado.getDate("datasaida"));
+                servico.setTecnicoResponsavel(resultado.getString("tecnicoresponsavel"));
+                servico.setSecaoRequerente(resultado.getString("secaoresponsavel"));
+                servico.setObservacao(resultado.getString("observacoes"));
+                servico.setSituacao(resultado.getString("situacao"));
+                servico.setPatrimonioMaquina(resultado.getInt("patrimonio_maquina"));
+                retorno.add(servico);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return retorno;
+    }
+    
     public Servico buscar(Servico servico) {
         String sql = "SELECT * FROM servicos WHERE id=?";
         Servico retorno = new Servico();

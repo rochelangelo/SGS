@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/PROJETOS/SGS/src/controller/ServicoController.java</file>
+            <file>file:/E:/PROJETOS/SGS/src/model/dao/UsuarioDAO.java</file>
+            <file>file:/E:/PROJETOS/SGS/src/controller/CadServicoDialogController.java</file>
+            <file>file:/E:/PROJETOS/SGS/src/controller/CadUsuarioDialogController.java</file>
+            <file>file:/E:/PROJETOS/SGS/src/controller/UsuarioController.java</file>
             <file>file:/E:/PROJETOS/SGS/src/model/dao/ServicoDAO.java</file>
-            <file>file:/E:/PROJETOS/SGS/src/controller/GraficoSerivocosController.java</file>
         </group>
     </open-files>
 </project-private>

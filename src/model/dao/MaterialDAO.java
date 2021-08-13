@@ -6,6 +6,7 @@
 package model.dao;
 
 import com.sun.javafx.logging.PlatformLogger;
+import static java.lang.System.console;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.Alert;
 import javax.swing.JOptionPane;
 import model.bean.Material;
 
@@ -63,6 +65,32 @@ public class MaterialDAO {
             stmt.execute();
             return true;
         } catch (SQLException ex) {
+            Logger.getLogger(MaterialDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+    
+    public boolean retirarMaterial(Material material, int qtd){
+        String sql = "UPDATE materiais SET quantidade=? WHERE id=?";
+        try{
+            int valorNovo = material.getQuantidade() - qtd;
+            
+            if(valorNovo >= 0){
+                PreparedStatement stmt = connection.prepareStatement(sql);
+                stmt.setInt(1, valorNovo);
+                stmt.setInt(2, material.getId());
+                stmt.execute();
+                if(valorNovo == 0){
+                    this.remover(material);
+                }
+                return true;
+            }else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Quantidade Superior a do estoque atualmente!");
+                alert.show();
+                return false;
+            }
+        }catch (SQLException ex){
             Logger.getLogger(MaterialDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }

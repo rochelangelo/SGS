@@ -75,11 +75,12 @@
                                           <Label fx:id="labelMaterialId" GridPane.columnIndex="1" />
                                        </children>
                                     </GridPane>
-                                    <Group layoutX="90.0" layoutY="632.0" AnchorPane.bottomAnchor="150.0">
+                                    <Group layoutX="90.0" layoutY="632.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="82.0" AnchorPane.rightAnchor="82.0">
                                        <children>
-                                          <Button layoutX="185.0" layoutY="3.0" mnemonicParsing="false" onAction="#handleButtonAlterar" prefHeight="25.0" prefWidth="80.0" text="ATUALIZAR" />
                                           <Button layoutY="5.0" mnemonicParsing="false" onAction="#handleButtonInserir" prefHeight="25.0" prefWidth="80.0" text="INSERIR" />
-                                          <Button layoutX="388.0" mnemonicParsing="false" onAction="#handleButtonRemove" prefHeight="25.0" prefWidth="80.0" text="EXCLUIR" />
+                                          <Button layoutX="133.0" layoutY="5.0" mnemonicParsing="false" onAction="#handleButtonRetirar" prefHeight="25.0" prefWidth="80.0" text="RETIRAR" />
+                                          <Button layoutX="257.0" layoutY="5.0" mnemonicParsing="false" onAction="#handleButtonAlterar" prefHeight="25.0" prefWidth="80.0" text="ATUALIZAR" />
+                                          <Button layoutX="388.0" layoutY="5.0" mnemonicParsing="false" onAction="#handleButtonRemove" prefHeight="25.0" prefWidth="80.0" text="EXCLUIR" />
                                        </children>
                                     </Group>
                                     <Button layoutX="561.0" layoutY="22.0" mnemonicParsing="false" onAction="#buttonFechaJanela" text="❌" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="12.5" />
